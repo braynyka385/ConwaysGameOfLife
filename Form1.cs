@@ -14,10 +14,11 @@ namespace ConwaysGameOfLife
     {
         Button pressedGridButton;
         Button pressedLifeButton;
-        Button[,] lifeButtons = new Button[16, 16];
-        int scaleValue = 60;
-        int[,] lifeLocations = new int[16, 16];
-        int[,] prevLifeLocations = new int[16, 16];
+        int gridSize = 44; //Default = 14
+        Button[,] lifeButtons = new Button[46, 46]; // gridSize + 2, gridSize + 2
+        int scaleValue = 20; // Default = 60
+        int[,] lifeLocations = new int[46, 46]; // gridSize + 2, gridSize + 2
+        int[,] prevLifeLocations = new int[46, 46]; // gridSize + 2, gridSize + 2
         public Form1()
         {
             InitializeComponent();
@@ -27,9 +28,9 @@ namespace ConwaysGameOfLife
         {
             startButton.Visible = false;
 
-            for (int x = 1; x <= 14; x++)
+            for (int x = 1; x <= gridSize; x++)
             {
-                for (int y = 1; y <= 14; y++)
+                for (int y = 1; y <= gridSize; y++)
                 {
                     Button gridButton = new Button();
                     this.Controls.Add(gridButton);
@@ -50,12 +51,12 @@ namespace ConwaysGameOfLife
             lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Size = pressedGridButton.Size;
             lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Location = pressedGridButton.Location;
             lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].BringToFront();
-            lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].BackColor = Color.White;
+            lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].BackColor = Color.Red;
             lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Click += new EventHandler(lifeButton_Click);
 
-            for (int x = 1; x <= 14; x++)
+            for (int x = 1; x <= gridSize; x++)
             {
-                for (int y = 1; y <= 14; y++)
+                for (int y = 1; y <= gridSize; y++)
                 {
                     if (x * scaleValue == lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Location.X && y * scaleValue == lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Location.Y)
                     {
@@ -69,9 +70,9 @@ namespace ConwaysGameOfLife
         public void lifeButton_Click (object sender, EventArgs e)
         {
             pressedLifeButton = (Button)sender;
-            for (int x = 1; x <= 14; x++)
+            for (int x = 1; x <= gridSize; x++)
             {
-                for (int y = 1; y <= 14; y++)
+                for (int y = 1; y <= gridSize; y++)
                 {
                     if (x * scaleValue == pressedLifeButton.Location.X && y * scaleValue == pressedLifeButton.Location.Y)
                     {
@@ -86,9 +87,9 @@ namespace ConwaysGameOfLife
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            for (int x = 1; x <= 14; x++)
+            for (int x = 1; x <= gridSize; x++)
             {
-                for (int y = 1; y <= 14; y++)
+                for (int y = 1; y <= gridSize; y++)
                 {
                     if (prevLifeLocations[x, y] == 1)
                     {
@@ -175,7 +176,7 @@ namespace ConwaysGameOfLife
                             this.Controls.Add(lifeButtons[x, y]);
                             lifeButtons[x, y].Visible = true;
                             lifeButtons[x, y].Size = new Size(scaleValue, scaleValue);
-                            lifeButtons[x, y].BackColor = Color.White;
+                            lifeButtons[x, y].BackColor = Color.Red;
                             lifeButtons[x, y].Location = new Point(x * scaleValue, y * scaleValue);
                             lifeButtons[x, y].Click += new EventHandler(lifeButton_Click);
                             lifeButtons[x, y].BringToFront();
@@ -188,9 +189,9 @@ namespace ConwaysGameOfLife
                 }
             }
 
-            for (int x = 1; x <= 14; x++)
+            for (int x = 1; x <= gridSize; x++)
             {
-                for (int y = 1; y <= 14; y++)
+                for (int y = 1; y <= gridSize; y++)
                 {
                     if (lifeLocations[x, y] != prevLifeLocations[x, y])
                     {
@@ -199,5 +200,6 @@ namespace ConwaysGameOfLife
                 }
             }
         }
+
     }
 }
