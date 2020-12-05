@@ -14,11 +14,11 @@ namespace ConwaysGameOfLife
     {
         Button pressedGridButton;
         Button pressedLifeButton;
-        int gridSize = 44; //Default = 14
-        Button[,] lifeButtons = new Button[46, 46]; // gridSize + 2, gridSize + 2
-        int scaleValue = 20; // Default = 60
-        int[,] lifeLocations = new int[46, 46]; // gridSize + 2, gridSize + 2
-        int[,] prevLifeLocations = new int[46, 46]; // gridSize + 2, gridSize + 2
+        int gridSize = 24; //Default = 14
+        Button[,] lifeButtons = new Button[26, 26]; // gridSize + 2, gridSize + 2
+        int scaleValue = 40; // Default = 60
+        int[,] lifeLocations = new int[26, 26]; // gridSize + 2, gridSize + 2
+        int[,] prevLifeLocations = new int[26, 26]; // gridSize + 2, gridSize + 2
         public Form1()
         {
             InitializeComponent();
@@ -201,5 +201,47 @@ namespace ConwaysGameOfLife
             }
         }
 
+        private void randomizeButton_Click(object sender, EventArgs e)
+        {
+            int lifeLikelyhood = 25; //Out of 100
+            Random rand = new Random();
+            for (int x = 1; x <= gridSize; x++)
+            {
+                for (int y = 1; y <= gridSize; y++)
+                {
+                    int isLife = rand.Next(1, 100);
+                    if (isLife <= lifeLikelyhood && prevLifeLocations[x, y] == 0)
+                    {
+                        lifeButtons[x, y] = new Button();
+                        this.Controls.Add(lifeButtons[x, y]);
+                        lifeButtons[x, y].Visible = true;
+                        lifeButtons[x, y].Size = new Size(scaleValue, scaleValue);
+                        lifeButtons[x, y].BackColor = Color.Red;
+                        lifeButtons[x, y].Location = new Point(x * scaleValue, y * scaleValue);
+                        lifeButtons[x, y].Click += new EventHandler(lifeButton_Click);
+                        lifeButtons[x, y].BringToFront();
+                        lifeLocations[x, y] = 1;
+                        prevLifeLocations[x, y] = 1;
+                        if (x % 5 == 0 && y % 5 == 0)
+                        {
+                            Refresh();
+                        }
+
+                    }
+                    else if (isLife <= lifeLikelyhood && prevLifeLocations[x, y] == 1)
+                    {
+                        lifeLocations[x, y] = 0;
+                        prevLifeLocations[x, y] = 0;
+                        lifeButtons[x, y].Visible = false;
+                        if (x % 5 == 0 && y % 5 == 0)
+                        {
+                            Refresh();
+                        }
+                    }
+
+                }
+            }
+
+        }
     }
 }
