@@ -46,7 +46,7 @@ namespace ConwaysGameOfLife
             // 
             // runButton
             // 
-            this.runButton.Location = new System.Drawing.Point(862, 93);
+            this.runButton.Location = new System.Drawing.Point(1145, 85);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(75, 23);
             this.runButton.TabIndex = 1;
@@ -58,7 +58,7 @@ namespace ConwaysGameOfLife
             // 
             this.debugLabel.AutoSize = true;
             this.debugLabel.ForeColor = System.Drawing.Color.White;
-            this.debugLabel.Location = new System.Drawing.Point(849, 289);
+            this.debugLabel.Location = new System.Drawing.Point(1142, 277);
             this.debugLabel.Name = "debugLabel";
             this.debugLabel.Size = new System.Drawing.Size(35, 13);
             this.debugLabel.TabIndex = 2;
@@ -69,7 +69,7 @@ namespace ConwaysGameOfLife
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1002, 760);
+            this.ClientSize = new System.Drawing.Size(1344, 959);
             this.Controls.Add(this.debugLabel);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.startButton);
