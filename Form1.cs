@@ -14,9 +14,9 @@ namespace ConwaysGameOfLife
     {
         Button pressedGridButton;
         Button pressedLifeButton;
-        Button[] lifeButtons = new Button[112];
+        Button[,] lifeButtons = new Button[12, 12];
         int scaleValue = 60;
-        int[] lifeLocations = new int[112];
+        int[,] lifeLocations = new int[12, 12];
         public Form1()
         {
             InitializeComponent();
@@ -43,27 +43,27 @@ namespace ConwaysGameOfLife
             pressedGridButton = (Button)sender;
             debugLabel.Text = pressedGridButton.Location.X / scaleValue + "\n" + pressedGridButton.Location.Y / scaleValue;
             //Button lifeButton = new Button();
-            lifeButtons[pressedGridButton.Location.Y / scaleValue * 10 + pressedGridButton.Location.X / scaleValue - 1] = new Button();
+            lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue] = new Button();
             //this.Controls.Add(lifeButton);
-            this.Controls.Add(lifeButtons[pressedGridButton.Location.Y / scaleValue * 10 + pressedGridButton.Location.X / scaleValue - 1]);
+            this.Controls.Add(lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue]);
             //lifeButton.Size = pressedGridButton.Size;
-            lifeButtons[pressedGridButton.Location.Y / scaleValue * 10 + pressedGridButton.Location.X / scaleValue - 1].Size = pressedGridButton.Size;
+            lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Size = pressedGridButton.Size;
             //lifeButton.Location = pressedGridButton.Location;
-            lifeButtons[pressedGridButton.Location.Y / scaleValue * 10 + pressedGridButton.Location.X / scaleValue - 1].Location = pressedGridButton.Location;
+            lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Location = pressedGridButton.Location;
             //lifeButton.BringToFront();
-            lifeButtons[pressedGridButton.Location.Y / scaleValue * 10 + pressedGridButton.Location.X / scaleValue - 1].BringToFront();
+            lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].BringToFront();
             //lifeButton.BackColor = Color.White;
-            lifeButtons[pressedGridButton.Location.Y / scaleValue * 10 + pressedGridButton.Location.X / scaleValue - 1].BackColor = Color.White;
+            lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].BackColor = Color.White;
             //lifeButton.Click += new EventHandler(lifeButton_Click);
-            lifeButtons[pressedGridButton.Location.Y / scaleValue * 10 + pressedGridButton.Location.X / scaleValue - 1].Click += new EventHandler(lifeButton_Click);
+            lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Click += new EventHandler(lifeButton_Click);
 
             for (int x = 1; x <= 10; x++)
             {
                 for (int y = 1; y <= 10; y++)
                 {
-                    if (x * scaleValue == lifeButtons[pressedGridButton.Location.Y / scaleValue * 10 + pressedGridButton.Location.X / scaleValue - 1].Location.X && y * scaleValue == lifeButtons[pressedGridButton.Location.Y / scaleValue * 10 + pressedGridButton.Location.X / scaleValue - 1].Location.Y)
+                    if (x * scaleValue == lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Location.X && y * scaleValue == lifeButtons[pressedGridButton.Location.X / scaleValue, pressedGridButton.Location.Y / scaleValue].Location.Y)
                     {
-                        lifeLocations[y * 10 + x - 1] = 1;
+                        lifeLocations[x, y] = 1;
                     }
                 }
             }
@@ -78,7 +78,7 @@ namespace ConwaysGameOfLife
                 {
                     if (x * scaleValue == pressedLifeButton.Location.X && y * scaleValue == pressedLifeButton.Location.Y)
                     {
-                        lifeLocations[y * 10 + x - 1] = 0;
+                        lifeLocations[x, y] = 0;
                     }
                 }
             }
@@ -88,95 +88,100 @@ namespace ConwaysGameOfLife
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            for (int x = 1; x <= 99; x++)
+            for (int x = 1; x <= 10; x++)
             {
-                if (lifeLocations[x] == 1)
+                for (int y = 1; y <= 10; y++)
                 {
-                    int localLife = 0;
-                    if (lifeLocations[x - 1] == 1)
+                    if (lifeLocations[x, y] == 1)
                     {
-                        localLife++;
-                    }
-                    if (lifeLocations[x + 1] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x + 10] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x - 10] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x + 11] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x - 11] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x + 9] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x - 9] == 1)
-                    {
-                        localLife++;
-                    }
+                        int localLife = 0;
+                        if (lifeLocations[x - 1, y] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x + 1, y] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x, y + 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x, y - 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x + 1, y + 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x - 1, y - 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x - 1, y + 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x + 1, y - 1] == 1)
+                        {
+                            localLife++;
+                        }
 
-                    if (localLife < 2 || localLife > 3)
-                    {
-                        lifeLocations[x] = 0;
-                        lifeButtons[x].Visible = false;
+                        if (localLife < 2 || localLife > 3)
+                        {
+                            lifeLocations[x, y] = 0;
+                            lifeButtons[x, y].Visible = false;
+                        }
                     }
-                }
-                else if (lifeLocations[x] == 0)
-                {
-                    int localLife = 0;
-                    if (lifeLocations[x - 1] == 1)
+                    else if (lifeLocations[x, y] == 0)
                     {
-                        localLife++;
-                    }
-                    if (lifeLocations[x + 1] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x + 10] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x - 10] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x + 11] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x - 11] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x + 9] == 1)
-                    {
-                        localLife++;
-                    }
-                    if (lifeLocations[x - 9] == 1)
-                    {
-                        localLife++;
-                    }
+                        int localLife = 0;
+                        if (lifeLocations[x - 1, y] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x + 1, y] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x, y + 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x, y - 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x + 1, y + 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x - 1, y - 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x - 1, y + 1] == 1)
+                        {
+                            localLife++;
+                        }
+                        if (lifeLocations[x + 1, y - 1] == 1)
+                        {
+                            localLife++;
+                        }
 
-                    if (localLife == 3)
-                    {
-                        lifeLocations[x] = 1;
-                        lifeButtons[x] = new Button();
-                        this.Controls.Add(lifeButtons[x]);
-                        lifeButtons[x].Visible = true;
-                        lifeButtons[x].Size = new Size (scaleValue, scaleValue);
-                        lifeButtons[x].Location = new Point(x * scaleValue / 10, x / scaleValue + 1);
-                        lifeButtons[x].BringToFront();
+                        if (localLife == 3)
+                        {
+                            lifeLocations[x, y] = 1;
+                            lifeButtons[x, y] = new Button();
+                            this.Controls.Add(lifeButtons[x, y]);
+                            lifeButtons[x, y].Visible = true;
+                            lifeButtons[x, y].Size = new Size(scaleValue, scaleValue);
+                            lifeButtons[x, y].BackColor = Color.White;
+                            lifeButtons[x, y].Location = new Point(x * scaleValue, y * scaleValue);
+
+                            lifeButtons[x, y].BringToFront();
+                        }
                     }
                 }
             }
