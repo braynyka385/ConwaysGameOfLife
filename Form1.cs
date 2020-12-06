@@ -14,11 +14,11 @@ namespace ConwaysGameOfLife
     {
         Button pressedGridButton;
         Button pressedLifeButton;
-        int gridSize = 24; //Default = 14
-        Button[,] lifeButtons = new Button[26, 26]; // gridSize + 2, gridSize + 2
-        int scaleValue = 40; // Default = 60
-        int[,] lifeLocations = new int[26, 26]; // gridSize + 2, gridSize + 2
-        int[,] prevLifeLocations = new int[26, 26]; // gridSize + 2, gridSize + 2
+        int gridSize = 26; //Default = 14
+        Button[,] lifeButtons = new Button[28, 28]; // gridSize + 2, gridSize + 2
+        int scaleValue = 30; // Default = 60
+        int[,] lifeLocations = new int[28, 28]; // gridSize + 2, gridSize + 2
+        int[,] prevLifeLocations = new int[28, 28]; // gridSize + 2, gridSize + 2
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +30,7 @@ namespace ConwaysGameOfLife
 
             for (int x = 1; x <= gridSize; x++)
             {
+                Refresh();
                 for (int y = 1; y <= gridSize; y++)
                 {
                     Button gridButton = new Button();
@@ -242,6 +243,28 @@ namespace ConwaysGameOfLife
                 }
             }
 
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            for (int x = 1; x <= gridSize; x++)
+            {
+                for (int y = 1; y <= gridSize; y++)
+                {
+                    if (lifeLocations[x, y] == 1)
+                    {
+                        lifeLocations[x, y] = 0;
+                        prevLifeLocations[x, y] = 0;
+                        lifeButtons[x, y].Visible = false;
+                        if (x % 5 == 0 && y % 5 == 0)
+                        {
+                            Refresh();
+                        }
+                    }
+
+
+                }
+            }
         }
     }
 }

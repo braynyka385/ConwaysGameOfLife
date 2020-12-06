@@ -33,6 +33,7 @@ namespace ConwaysGameOfLife
             this.runButton = new System.Windows.Forms.Button();
             this.debugLabel = new System.Windows.Forms.Label();
             this.randomizeButton = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // startButton
@@ -75,12 +76,23 @@ namespace ConwaysGameOfLife
             this.randomizeButton.UseVisualStyleBackColor = true;
             this.randomizeButton.Click += new System.EventHandler(this.randomizeButton_Click);
             // 
+            // clearButton
+            // 
+            this.clearButton.Location = new System.Drawing.Point(1145, 176);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(75, 23);
+            this.clearButton.TabIndex = 4;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1344, 959);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.randomizeButton);
             this.Controls.Add(this.debugLabel);
             this.Controls.Add(this.runButton);
@@ -98,6 +110,7 @@ namespace ConwaysGameOfLife
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Label debugLabel;
         private System.Windows.Forms.Button randomizeButton;
+        private System.Windows.Forms.Button clearButton;
     }
 }
 
