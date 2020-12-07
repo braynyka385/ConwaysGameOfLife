@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +79,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\[ONTIVA.COM] SCP_ Containment Breach and SCP_ Secret Laboratory - Femur Breaker Sound-HQ.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SCP Containment Breach and SCP Secret Laboratory - Femur Breaker Sound.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24-Dark fantasy studio- Speed devil.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
+using System.Threading;
 
 namespace ConwaysGameOfLife
 {
@@ -19,6 +21,8 @@ namespace ConwaysGameOfLife
         int scaleValue = 30; // Default = 60
         int[,] lifeLocations = new int[28, 28]; // gridSize + 2, gridSize + 2
         int[,] prevLifeLocations = new int[28, 28]; // gridSize + 2, gridSize + 2
+        SoundPlayer femurBreak = new SoundPlayer(Properties.Resources.Femur);
+        SoundPlayer music = new SoundPlayer(Properties.Resources._24_Dark_fantasy_studio__Speed_devil);
         public Form1()
         {
             InitializeComponent();
@@ -26,6 +30,7 @@ namespace ConwaysGameOfLife
 
         public void startButton_Click(object sender, EventArgs e)
         {
+            music.Play();
             startButton.Visible = false;
 
             for (int x = 1; x <= gridSize; x++)
@@ -79,6 +84,7 @@ namespace ConwaysGameOfLife
                     {
                         lifeLocations[x, y] = 0;
                         prevLifeLocations[x, y] = 0;
+                        femurBreak.Play();
                     }
                 }
             }
@@ -247,6 +253,7 @@ namespace ConwaysGameOfLife
 
         private void clearButton_Click(object sender, EventArgs e)
         {
+            femurBreak.Play();
             for (int x = 1; x <= gridSize; x++)
             {
                 for (int y = 1; y <= gridSize; y++)
